@@ -6,14 +6,15 @@
   "scripts": {
     "start": "node ./bin",
     "dev": "cross-env NODE_ENV=development nodemon ./bin --inspect=0.0.0.0:9229",
-    "test": "cross-env NODE_ENV=test mocha tests/**/*-test.js --inspect=0.0.0.0:9229 --exit",
+    "test": "cross-env NODE_ENV=test mocha tests/**/*-test.js --inspect-brk=0.0.0.0:9229 --exit",
     "lint": "./node_modules/.bin/eslint src/",
     "docker-build": "docker-compose build",
     "docker:dev-start": "docker-compose up -d",
     "docker:dev-logs": "docker-compose logs -f",
     "docker:test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit",
     "docker:stop": "docker-compose down",
-    "migrate": "./node_modules/.bin/knex migrate:latest"
+    "migrate": "./node_modules/.bin/knex migrate:latest",
+    "seed": "./node_modules/.bin/knex seed:run"
   },
   "repository": {
     "type": "git",

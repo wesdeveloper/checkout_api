@@ -18,7 +18,7 @@ services:
     ports:
       - '4000:4000'
       - '9229:9229'
-    command: sh -c "/wait && npm run migrate && npm t"
+    command: sh -c "/wait && npm run migrate && npm run seed && npm t"
     depends_on:
       - db
   db:
