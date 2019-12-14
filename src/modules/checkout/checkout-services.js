@@ -7,6 +7,7 @@ const checkout = (data = {}) => {
 
   const calculatePrice = (product, qtd, price) => {
     const rules = priceRules[product];
+
     if (rules) {
       const rule = rules[customer];
       if (rule) {
@@ -16,12 +17,14 @@ const checkout = (data = {}) => {
             const groupedPrice =
               itensGrouped * (price * (rule.payFor / rule.qtd));
             const normalPrice = (qtd % rule.qtd) * price;
+
             return normalPrice + groupedPrice;
           }
         } else if (rule.type === 'discount' && qtd >= rule.min) {
           return qtd * rule.price;
         }
       }
+      return qtd * price;
     } else {
       return qtd * price;
     }

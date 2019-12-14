@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 const assert = require('assert');
 const morgan = require('morgan');
@@ -16,7 +18,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-// routes
+// Load routes
+const modulesPath = path.resolve(__dirname, 'modules');
+fs.readdirSync(modulesPath).forEach(folder => {
+  fs.readdirSync(path.resolve(modulesPath, folder))
+    .filter(file => file.includes('routes'))
+    .forEach(file => {
+      app.use('/api', require(path.resolve(modulesPath, folder, file)));
+    });
+});
+
 app.get('/api', (req, res) => res.send({ message: 'Welcome to the API' }));
 
 // catch 404

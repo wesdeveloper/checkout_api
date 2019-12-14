@@ -4,21 +4,21 @@ const checkoutServices = require('../../src/modules/checkout/checkout-services')
 describe('Checkout - Integration tests', () => {
   describe('Validate single checkout', () => {
     it('Should add an classic item with default price rules and get total of checkout', async () => {
-      const co = checkoutServices({ customer: 'UNILEVER' });
+      const co = checkoutServices({ customer: 'Uniliver' });
       await co.addItem('classic');
       const total = await co.getTotal();
       assert.deepEqual(total, 269.99);
     });
 
     it('Should add an standout item with default price rules and get total of checkout', async () => {
-      const co = checkoutServices({ customer: 'UNILEVER' });
+      const co = checkoutServices({ customer: 'Uniliver' });
       await co.addItem('standout');
       const total = await co.getTotal();
       assert.deepEqual(total, 322.99);
     });
 
     it('Should add an premium item with default price rules and get total of checkout', async () => {
-      const co = checkoutServices({ customer: 'UNILEVER' });
+      const co = checkoutServices({ customer: 'Uniliver' });
       await co.addItem('premium');
       const total = await co.getTotal();
       assert.deepEqual(total, 394.99);
@@ -87,7 +87,7 @@ describe('Checkout - Integration tests', () => {
   });
 
   describe('NIKE', () => {
-    it('Sould get an Apple checkout', async () => {
+    it('Sould get an Nike checkout', async () => {
       const co = checkoutServices({
         premium: {
           Nike: {
