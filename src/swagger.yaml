@@ -4,8 +4,8 @@ info:
   version: '1.0'
   title: Checkout API
 servers:
+  - url: https://weslopescheckout.herokuapp.com/
   - url: http://127.0.0.1:4000/
-  - url: https://checkoutapi.herokuapp.com
 schemes:
   - http
 consumes:

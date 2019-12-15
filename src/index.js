@@ -39,7 +39,8 @@ fs.readdirSync(modulesPath).forEach(folder => {
 });
 
 const swaggerData = yaml.load(swaggerDocument);
-swaggerData.servers[0].url = `http://${ip.address()}:${process.env.PORT}`;
+// Swagger development url
+swaggerData.servers[1].url = `http://${ip.address()}:${process.env.PORT}`;
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerData));
 app.get('/', (req, res) =>
