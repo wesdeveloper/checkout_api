@@ -1,3 +1,5 @@
+const ip = require('ip');
+
 const api = require('../src');
 
 const PORT = process.env.PORT || 4000;
@@ -7,7 +9,7 @@ const PORT = process.env.PORT || 4000;
   const app = await api;
   app.listen(PORT, () =>
     console.info(
-      `Server is running at port ${PORT}, see more about the application on PORT: ${PORT}`
+      `Server is running at port ${PORT}, see more about the application on: http://${ip.address()}:${PORT}/api/docs`
     )
   );
 })();

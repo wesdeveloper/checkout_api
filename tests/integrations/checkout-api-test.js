@@ -60,7 +60,7 @@ describe('Checkout API - Integration tests', async () => {
     });
   });
 
-  describe('Apple', () => {
+  describe('APPLE', () => {
     it('Sould add an Apple checkout', async () => {
       const { status, body } = await request.post('/api/checkout').send({
         customer: 'Apple',

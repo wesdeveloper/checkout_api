@@ -1,14 +1,24 @@
 require('dotenv').config();
 
+const ip = require('ip');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const yaml = require('js-yaml');
 const assert = require('assert');
 const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
 
 const { database } = require('./configs');
+
+const swaggerDocument = fs.readFileSync(
+  path.resolve(__dirname, 'swagger.yaml'),
+  {
+    encoding: 'utf-8'
+  }
+);
 
 const app = express();
 
@@ -28,7 +38,15 @@ fs.readdirSync(modulesPath).forEach(folder => {
     });
 });
 
-app.get('/api', (req, res) => res.send({ message: 'Welcome to the API' }));
+const swaggerData = yaml.load(swaggerDocument);
+swaggerData.servers[0].url = `http://${ip.address()}:${process.env.PORT}`;
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerData));
+app.get('/', (req, res) =>
+  res.send({
+    message: 'Welcome to the Checkout Api, see /api/docs to see more...'
+  })
+);
 
 // catch 404
 app.use((req, res) => res.status(404).send());

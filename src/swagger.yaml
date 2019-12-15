@@ -1,0 +1,52 @@
+openapi: '3.0.0'
+info:
+  description: Checkout API
+  version: '1.0'
+  title: Checkout API
+servers:
+  - url: http://127.0.0.1:4000/
+  - url: https://checkoutapi.herokuapp.com
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/checkout:
+    post:
+      tags:
+        - Checkout
+      summary: Make checkout of itens.
+      description: Make checkout of itens.
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+      responses:
+        '201':
+          description: successful operation
+        '500':
+          description: internal error
+components:
+  schemas:
+    Checkout:
+      type: object
+      required:
+        - itens
+      properties:
+        customer:
+          type: string
+          enum: ['default', 'Unilever', 'Apple', 'Nike']
+          example: Nike
+        itens:
+          type: array
+          properties:
+            item:
+              type: string
+              enum: ['classic', 'standout', 'premium']
+              example: 'classic'
+          example: ['premium', 'premium', 'premium', 'premium']
