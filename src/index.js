@@ -31,11 +31,13 @@ app.use(cors());
 // Load routes
 const modulesPath = path.resolve(__dirname, 'modules');
 fs.readdirSync(modulesPath).forEach(folder => {
-  fs.readdirSync(path.resolve(modulesPath, folder))
-    .filter(file => file.includes('routes'))
-    .forEach(file => {
-      app.use('/api', require(path.resolve(modulesPath, folder, file)));
-    });
+  if (!folder.includes('.js')) {
+    fs.readdirSync(path.resolve(modulesPath, folder))
+      .filter(file => file.includes('routes'))
+      .forEach(file => {
+        app.use('/api', require(path.resolve(modulesPath, folder, file)));
+      });
+  }
 });
 
 const swaggerData = yaml.load(swaggerDocument);

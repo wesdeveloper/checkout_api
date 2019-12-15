@@ -70,6 +70,8 @@ npm test
 
 - [KnexJs](https://knexjs.org/) - Knex.js is a "batteries included" SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift designed to be flexible, portable, and fun to use.
 
+- [Joi](https://github.com/hapijs/joi) - Object schema description language and validator for JavaScript objects.
+
 - [Swagger](https://swagger.io/) - Swagger aides in development across the entire API lifecycle, from design and documentation, to test and deployment.
 
 - [Mocha](https://mochajs.org/) - Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser.

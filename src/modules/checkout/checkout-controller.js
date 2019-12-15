@@ -27,7 +27,7 @@ const pricingRules = {
 
 const checkoutProducts = async (req, res) => {
   try {
-    const { customer, itens } = req.body;
+    const { customer, itens } = req.payload.body;
 
     const co = checkoutServices(pricingRules);
     await co.setCustomer(customer);
