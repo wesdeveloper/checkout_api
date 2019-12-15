@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const validateOptions = {
   abortEarly: false,
-  allowUnknown: true,
+  allowUnknown: true
 };
 
 /**
@@ -45,11 +45,11 @@ const validateBody = schema => (req, res, next) => {
     const errors = result.error.details.reduce(
       (acc, curr) =>
         acc.concat({ path: curr.path.join('.'), message: curr.message }),
-      [],
+      []
     );
 
     console.error('validateBody', errors);
-    return res.parseReturn({ status: 400, data: { errors } });
+    return res.status(400).json(errors);
   }
   if (!req.payload) {
     req.payload = {};
@@ -78,7 +78,7 @@ const validateObject = (object, schema) => {
     return result.error.details.reduce(
       (acc, curr) =>
         acc.concat({ path: curr.path.join('.'), message: curr.message }),
-      [],
+      []
     );
   }
   return [];
@@ -87,5 +87,5 @@ const validateObject = (object, schema) => {
 module.exports = {
   validateBody,
   validateParam,
-  validateObject,
+  validateObject
 };
